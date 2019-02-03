@@ -19,9 +19,27 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+/**
+ * This class is responsible to get an XML file from Bank Of Israel, containing information about currency exchange rates.
+ * Once the XML was retrieved, the class saves in to a local file, to be used in Offline Mode, in case there's no internet connection
+ * or the BOI service is down.
+ * The class parses the XML, that was received online or offline, into a List of Currencies, which then are send to the CurrencyGUI to be added to the table.
+ * It holds a reference to the GUI in order to send data to it.
+ * It implements Runnable and runs in the EDT Thread.
+ * @see CurrencyGUI
+ */
 public class XMLParser implements Runnable {
+
+    /**
+     * a Reference to the CurrencyGUI.
+     */
     private CurrencyGUI gui;
 
+    /**
+     * XMLParser Constructor.
+     * gets a reference to CurrencyGUI in order to invoke methods and send data to it.
+     * @param gui   a Reference to the client's CurrencyGUI
+     */
     public XMLParser(CurrencyGUI gui){
         setGUI(gui);
     }
@@ -33,19 +51,35 @@ public class XMLParser implements Runnable {
         gui.createList(currList);
     }
 
+    /**
+     * GUI Getter.
+     * @return CurrencyGUI a reference to the GUI.
+     * @see CurrencyGUI
+     */
     CurrencyGUI getGui(){
         return gui;
     }
 
+    /**
+     * GUI Setter
+     * @param gui a reference to the CurrencyGUI.
+     * @see CurrencyGUI
+     */
     public void setGUI(CurrencyGUI gui){
         this.gui = gui;
     }
 
+    /**
+     * This method gets XML data from an outer service, saves it to a local file and parses it into a list of Nodes.
+     * If the connection fails, an exception will be thrown and caught, invoking offlineNodeList() method.
+     * @return NodeList a list of nodes parsed from the XML file\XML query.
+     */
     public NodeList getNodeList(){
         InputStream is = null;
         HttpsURLConnection con = null;
         NodeList list;
 
+        /* Setting up a connection to the BOI Currency URL and parsing the XML file received */
         try {
             URL url = new URL("https://www.boi.org.il/currency.xml");
             con = (HttpsURLConnection) url.openConnection();
@@ -87,6 +121,10 @@ public class XMLParser implements Runnable {
         return list;
     }
 
+    /**
+     * This method gets XML data from a local file, and parses it into a list of Nodes.
+     * @return NodeList a list of nodes parsed from the XML file\XML query.
+     */
     public NodeList offlineNodeList(){
         File currencies = new File("Currencies.xml");
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -109,6 +147,11 @@ public class XMLParser implements Runnable {
         return list;
     }
 
+    /**
+     * @param   list    NodeList received from getNodeList() or offlineNodeList().
+     * @return          a List of Currency, parsed from the NodeList.
+     * @see     Currency
+     */
     public List<Currency> getCurrencyList(NodeList list){
         int length = list.getLength();
         List<Currency> currList = new ArrayList<>();

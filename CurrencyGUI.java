@@ -7,7 +7,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 
+/**
+ * This class represents the client GUI.
+ * Has a table of all the currencies with full information.
+ */
 public class CurrencyGUI {
+    /**
+     * Swing components, used to build the GUI.
+     */
     private JFrame frame;
     private JTable jTable;
     private JPanel topPanel, botPanel;
@@ -16,8 +23,17 @@ public class CurrencyGUI {
     private JTextField amount, result;
     private JLabel fromL, toL, resultL, date;
     private JButton convert;
+
+    /**
+     * A Map that holds the currency name as Key, with the currency exchange rate as Value.
+     * Used to convert from one currency to an other.
+     */
     private CurrencyMap currencyMap;
 
+    /**
+     * CurrencyGUI Constructor
+     * Creates all needed elements.
+     */
     public CurrencyGUI(){
         String[] columnNames = {"Name", "Unit" , "Country","Country Code", "Rate", "Change"};
         frame = new JFrame("Currencies");
@@ -52,6 +68,9 @@ public class CurrencyGUI {
         convert = new JButton("Convert!");
     }
 
+    /**
+     * Getters and Setters
+     */
     public JFrame getFrame() {
         return frame;
     }
@@ -172,6 +191,10 @@ public class CurrencyGUI {
         this.currencyMap = currencyMap;
     }
 
+    /**
+     * Creates the GUI.
+     * Adds event listeners where needed.
+     */
     public void createUI(){
         frame.setMinimumSize(new Dimension(700, 400));
         topPanel.add(date);
@@ -196,10 +219,17 @@ public class CurrencyGUI {
             }
         });
 
-        //convert.addActionListener(e -> SwingUtilities.invokeLater(new Calculator(CurrencyGUI.this, CurrencyGUI.this.getCurrencyMap())));
         convert.addActionListener(e -> new Calculator(CurrencyGUI.this, CurrencyGUI.this.getCurrencyMap()).run());
     }
 
+    /**
+     * This method inserts all the rows and drop list items needed for the GUI.
+     * Each row represents one currency.
+     * The List is received from XMLParser, which queries a currency service.
+     * @param list A list of Currency.
+     * @see   Currency
+     * @see   XMLParser
+     */
     public void createList(List<Currency> list){
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
         from.removeAllItems();
