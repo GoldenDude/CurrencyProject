@@ -130,6 +130,7 @@ public class XMLParser implements Runnable {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         NodeList list;
 
+        /* If exception will be thrown, the app will shut down as there is nothing to show/work with */
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(currencies);

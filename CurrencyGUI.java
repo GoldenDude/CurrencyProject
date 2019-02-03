@@ -35,9 +35,12 @@ public class CurrencyGUI {
      * Creates all needed elements.
      */
     public CurrencyGUI(){
+        /* Will be used when creating the table */
         String[] columnNames = {"Name", "Unit" , "Country","Country Code", "Rate", "Change"};
         frame = new JFrame("Currencies");
         frame.setLayout(new BorderLayout());
+
+        /* Setting every cell to be uneditable */
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -49,6 +52,7 @@ public class CurrencyGUI {
             model.addColumn(cul);
         }
 
+        //creating gui components
         jTable  = new JTable(model);
         scroller = new JScrollPane(jTable);
         from = new JComboBox<>();
@@ -211,6 +215,7 @@ public class CurrencyGUI {
         frame.add(scroller, BorderLayout.CENTER);
         frame.setVisible(true);
 
+        //adding events listeners
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

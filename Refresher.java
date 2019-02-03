@@ -14,7 +14,7 @@ public class Refresher implements Runnable {
 
     @Override
     public void run() {
-        Runnable runnable = () -> { gui.createList(parser.getCurrencyList(parser.getNodeList())); };
+        Runnable runnable = () -> gui.createList(parser.getCurrencyList(parser.getNodeList()));
 
         while(true){
             try {
