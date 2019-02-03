@@ -243,6 +243,7 @@ public class CurrencyGUI {
         from.addItem("NIS");
         to.addItem("NIS");
 
+        /* for every Currency in the list, add it as a new row to the Table and add it to both DropBoxes */
         for(Currency cur: list){
             model.addRow(new Object[]{cur.getName(), cur.getUnit(), cur.getCountryName() ,cur.getCode(), cur.getRate(), cur.getChange()});
             from.addItem(cur.getCode());

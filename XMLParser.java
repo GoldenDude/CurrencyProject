@@ -149,6 +149,8 @@ public class XMLParser implements Runnable {
     }
 
     /**
+     * This method makes a List from NodeList received.
+     * The List is a list of Currencies.
      * @param   list    NodeList received from getNodeList() or offlineNodeList().
      * @return          a List of Currency, parsed from the NodeList.
      * @see     Currency
@@ -157,8 +159,8 @@ public class XMLParser implements Runnable {
         int length = list.getLength();
         List<Currency> currList = new ArrayList<>();
 
+        /* This loop goes through the NodeList and for each node, creates a Currency object that is inserted into the list */
         for(int i = 0; i < length; i++){
-
             String name = list.item(i).getChildNodes().item(1).getTextContent();
             int unit = Integer.parseInt(list.item(i).getChildNodes().item(3).getTextContent());
             String code = list.item(i).getChildNodes().item(5).getTextContent();
@@ -168,6 +170,7 @@ public class XMLParser implements Runnable {
             currList.add(new Currency(name, unit, code, countryName ,rate, change));
         }
 
+        /* Creates and updates the Map */
         CurrencyMap currencyMap = new CurrencyMap();
         currencyMap.setMap(currList);
         gui.setCurrencyMap(currencyMap);
