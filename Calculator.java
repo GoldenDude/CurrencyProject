@@ -2,15 +2,35 @@ package com.azranozeri.finalproject;
 
 import java.util.Map;
 
+/**
+ * The class is used to calculate and convert Currencies.
+ * Implements Runnable in order to be sent to the EDT Thread (using SwingUtils.invokeLater(Runnable obj) ), as it changes and reads from the GUI.
+ */
 public class Calculator implements Runnable {
+    /**
+     * a Reference to the CurrencyGUI used by the client
+     */
     CurrencyGUI gui;
+
+    /**
+     * a Reference to the CurrencyMap
+     * @see CurrencyMap
+     */
     CurrencyMap map;
 
+    /**
+     * Calculator Constructor
+     * @param gui   a Reference to the CurrencyGUI used by the client.
+     * @param map   a Reference to the CurrencyMap.
+     */
     Calculator(CurrencyGUI gui, CurrencyMap map){
         setGui(gui);
         setMap(map);
     }
 
+    /**
+     * Getters and Setters
+     */
     public CurrencyGUI getGui() {
         return gui;
     }
@@ -27,10 +47,18 @@ public class Calculator implements Runnable {
         this.map = map;
     }
 
+    /**
+     * The implementation of run()
+     * Reads from the CurrencyGUI and changes it.
+     * @see CurrencyGUI
+     */
     @Override
     public void run(){
+        /* Getting the information needed from the GUI */
         String from = (String) gui.getFrom().getSelectedItem();
         String to   = (String) gui.getTo().getSelectedItem();
+
+        /* Getting the currency map from the GUI*/
         Map<String, Currency> cMap = map.getCurrencyMap();
         Currency f = cMap.get(from);
         Currency t = cMap.get(to);
@@ -38,6 +66,7 @@ public class Calculator implements Runnable {
         double amount;
         double total;
 
+        /* If the user did not write anything in the Amount text area in the GUI, an exception will be thrown by parseDouble */
         try{
           amount = Double.parseDouble(gui.getAmount().getText());
         }
@@ -46,9 +75,13 @@ public class Calculator implements Runnable {
         }
 
         double first, second;
+
+        /* The conversion rate formula. Converts to Shekel first. */
         first = f.getRate() * amount / f.getUnit();
         second = t.getRate() / t.getUnit();
         total = first / second;
+
+        /* Normalizing the result to XX.XX format*/
         String totalString = String.format("%.2f", total);
         gui.getResult().setText("");
         gui.getResult().setText(totalString);

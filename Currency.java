@@ -1,15 +1,49 @@
 package com.azranozeri.finalproject;
 
+/**
+ * This class holds all information regarding a Currency.
+ * Each Object should represent one Currency (e.g USD, GBP etc)
+ */
 public class Currency {
+    /**
+     * The name of the Currency (e.g Dollar)
+     */
     private String name;
+
+    /**
+     * The amount that states the conversion ratio
+     */
     private int unit;
+
+    /**
+     * The currency's code (e.g USD)
+     */
     private String code;
+
+    /**
+     * The name of the country (e.g USA)
+     */
     private String countryName;
+
+    /**
+     * The conversion rate
+     */
     private double rate;
+
+    /**
+     * The change in the conversion rate from the last update.
+     */
     private double change;
 
-    public Currency(){}
-
+    /**
+     * Currency Constructor
+     * @param name          e.g Dollar/Pound.
+     * @param unit          The amount that is converted: 100 YEN = X.XX Shekels.
+     * @param code          e.g USD/GBP.
+     * @param countryName   e.g USA/Great Britain
+     * @param rate          The conversion rate.
+     * @param change        The change in the conversion rate from the last update.
+     */
     public Currency(String name, int unit, String code, String countryName ,double rate, double change) {
         setChange(change);
         setCode(code);
@@ -19,6 +53,10 @@ public class Currency {
         setCountryName(countryName);
     }
 
+    /**
+     * Getters and Setters.
+     * Every setter has it's validators
+     */
     public String getName() {
         return name;
     }
@@ -82,6 +120,10 @@ public class Currency {
         this.change = change;
     }
 
+    /**
+     * An Override to the toString method
+     * @return a String to pring the object
+     */
     @Override
     public String toString() {
         return "Currency{" +
