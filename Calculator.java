@@ -1,6 +1,14 @@
 package com.azranozeri.finalproject;
 
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.SimpleLayout;
+
+import java.io.IOException;
 import java.util.Map;
+
+import static com.azranozeri.finalproject.CurrencyDemo.logger;
 
 /**
  * The class is used to calculate and convert Currencies.
@@ -10,13 +18,13 @@ public class Calculator implements Runnable {
     /**
      * a Reference to the CurrencyGUI used by the client
      */
-    CurrencyGUI gui;
+    private CurrencyGUI gui;
 
     /**
      * a Reference to the CurrencyMap
      * @see CurrencyMap
      */
-    CurrencyMap map;
+    private CurrencyMap map;
 
     /**
      * Calculator Constructor
@@ -26,6 +34,8 @@ public class Calculator implements Runnable {
     Calculator(CurrencyGUI gui, CurrencyMap map){
         setGui(gui);
         setMap(map);
+
+        logger.info(this.getClass().getName() + " Created");
     }
 
     /**

@@ -7,6 +7,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 
+import static com.azranozeri.finalproject.CurrencyDemo.logger;
+
 /**
  * This class represents the client GUI.
  * Has a table of all the currencies with full information.
@@ -70,6 +72,7 @@ public class CurrencyGUI {
         fromL = new JLabel("Amount");
         resultL = new JLabel("Result");
         convert = new JButton("Convert!");
+        logger.info(this.getClass().getName() + " Created");
     }
 
     /**

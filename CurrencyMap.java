@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.azranozeri.finalproject.CurrencyDemo.logger;
+
 /**
  * This class holds the Currency map used for converting currencies.
  * @see Currency
@@ -19,6 +21,7 @@ public class CurrencyMap {
      */
     CurrencyMap(){
         currencyMap = new HashMap<>();
+        logger.info(this.getClass().getName() + " Created");
     }
 
     /**

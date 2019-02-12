@@ -3,6 +3,8 @@ package com.azranozeri.finalproject;
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;
 
+import static com.azranozeri.finalproject.CurrencyDemo.logger;
+
 /**
  * This class implements Runnable to be ran as an independent thread.
  * It's responsibility is to query the external URL (Bank Of Israel Currency Service) on an hourly bases.
@@ -28,6 +30,7 @@ public class Refresher implements Runnable {
     public Refresher(CurrencyGUI gui){
         setGui(gui);
         setParser(new XMLParser(gui));
+        logger.info(this.getClass().getName() + " Created");
     }
 
     /**

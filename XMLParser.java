@@ -19,6 +19,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import static com.azranozeri.finalproject.CurrencyDemo.logger;
+
 /**
  * This class is responsible to get an XML file from Bank Of Israel, containing information about currency exchange rates.
  * Once the XML was retrieved, the class saves in to a local file, to be used in Offline Mode, in case there's no internet connection
@@ -42,6 +44,7 @@ public class XMLParser implements Runnable {
      */
     public XMLParser(CurrencyGUI gui){
         setGUI(gui);
+        logger.info(this.getClass().getName() + " Created");
     }
 
     public void run(){

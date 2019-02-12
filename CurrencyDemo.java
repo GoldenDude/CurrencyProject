@@ -1,5 +1,11 @@
 package com.azranozeri.finalproject;
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+
 import javax.swing.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -12,6 +18,24 @@ import java.lang.reflect.InvocationTargetException;
  * @see     Refresher
  */
 public class CurrencyDemo {
+    public static Logger logger;
+
+    static {
+        String file = "logs.txt";
+        logger = Logger.getLogger(Class.class.getName());
+
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            writer.print("");
+            writer.close();
+
+            logger.addAppender(new FileAppender(new PatternLayout("%-5p [%t]: %m%n"), file));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args){
         /* Creating a new XMLParser */
         XMLParser xmlParser = new XMLParser(new CurrencyGUI());

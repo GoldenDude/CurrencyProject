@@ -1,5 +1,7 @@
 package com.azranozeri.finalproject;
 
+import static com.azranozeri.finalproject.CurrencyDemo.logger;
+
 /**
  * This class holds all information regarding a Currency.
  * Each Object should represent one Currency (e.g USD, GBP etc)
@@ -51,6 +53,7 @@ public class Currency {
         setRate(rate);
         setUnit(unit);
         setCountryName(countryName);
+        logger.info(this.getClass().getName() + " Created");
     }
 
     /**
