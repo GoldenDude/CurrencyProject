@@ -1,11 +1,5 @@
 package com.azranozeri.finalproject;
 
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.SimpleLayout;
-
-import java.io.IOException;
 import java.util.Map;
 
 import static com.azranozeri.finalproject.CurrencyDemo.logger;

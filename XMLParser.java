@@ -103,6 +103,7 @@ public class XMLParser implements Runnable {
 
         catch(SAXException | ParserConfigurationException | IOException | TransformerException e){
             e.printStackTrace();
+            logger.error("Failed to load online data. Getting data offline");
             list = offlineNodeList();
         }
 

@@ -228,6 +228,7 @@ public class CurrencyGUI {
         });
 
         convert.addActionListener(e -> new Calculator(CurrencyGUI.this, CurrencyGUI.this.getCurrencyMap()).run());
+        logger.info("Finished Creating GUI");
     }
 
     /**

@@ -45,6 +45,7 @@ public class Refresher implements Runnable {
         while(true){
             try {
                 TimeUnit.HOURS.sleep(1);
+                logger.info("Refresher woke up. Getting new data.");
                 SwingUtilities.invokeLater(runnable);
             }
             catch (InterruptedException e) {
